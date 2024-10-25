@@ -3,7 +3,7 @@
 This is the code for IDMP, implementing a gaussian process based distance and gradient field algorithm.
 
  * [Project Page](https://uts-ri.github.io/IDMP/)
- * [Paper](https://arxiv.org/abs/2403.09988v1)
+ * [Paper](https://arxiv.org/pdf/2403.09988v3)
  * [Video](https://www.youtube.com/watch?v=NpbDjCqXyrs)
  
 This codebase is implemented using ROS in both C++ and Python.
