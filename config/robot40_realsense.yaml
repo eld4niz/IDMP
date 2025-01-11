@@ -1,0 +1,19 @@
+idmp_rleng: 1.8
+idmp_tree_hl_min: 0.05
+idmp_tree_hl_max: 3.2
+idmp_tree_hl_clust: 0.1
+idmp_tree_hl_init: 1.6
+idmp_map_scale: 1024
+idmp_filt_outl: True
+
+idmp_pub_pcl: True
+idmp_world_frame: "base_link"
+idmp_pcl_topic: "/realsense_wrist/depth_registered/points"
+idmp_caminfo_topic: 
+  - ["/realsense_wrist/color/camera_info", "realsense_camera_depth_optical_frame"]
+idmp_dynamic: True
+idmp_fusion: False
+
+idmp_dyn_tresh: 0.1
+idmp_fus_min: 0.0005
+idmp_fus_max: 0.01

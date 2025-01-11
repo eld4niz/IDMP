@@ -62,6 +62,29 @@ Keep in mind that it needs the parameters of the config file in the parameter se
 
 These config also contains the topics of the input pointcloud, the camera intrinsics and the reference frame. Make sure to adjust these to your setup.
 
+### Running Robot40 with CHOMP Planner using IDMP Distances and Gradients
+
+First you have to run Gazebo model of robot40 with following command:
+
+`roslaunch robot40_gazebo robot40rightUR5_simulation.launch withGazeboGUI:=true world:=office`
+
+Then to change camera position to look down, you can run this command:
+
+`rostopic pub /controller_ur/order std_msgs/String "data: 'moveLookingDown'"`
+
+**Please note that you should run all these commands in docker environment of robot40 with ros noetic**
+
+After running these commands, we're done with setup of robot40, now we should move to the setup of IDMP.
+
+To run IDMP with robot40, you can run following command:
+`roslaunch idmp_ros robot40-realsense.launch`
+
+This command will run IDMP with robot40 and realsense camera.
+
+Then we should run CHOMP planner to plan the path for robot40. To run CHOMP planner, you can run following command:
+
+`python3 src/tools/ChompIDMPlanner.py`
+
 ### Running Benchmark Datasets
 
 The Datasets can be found here: 
@@ -97,6 +120,7 @@ We provide a set of tools to interact with IDMP for testing and demonstration pu
 - evalTool: This is similar to the queryTool but it can load a groundtruth pointcloud and calculate real time metrics like RMSE
 - speedMove: This is a basic implementation of obstacle avoidance with repulsive vectors by querying the distance field. This needs a robot driver to run and sends velocity commands to control the robot.
 - The eval folder contains some tools used to evaluate our results for the publication
+
 
 ### Parameters
 
