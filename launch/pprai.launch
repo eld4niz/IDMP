@@ -1,0 +1,23 @@
+<launch>
+    <!-- Argument declarations -->
+    <arg name="frame_id" default="robot_ref_frame_id" />
+    <arg name="topic_to_publish" default="/camera/transform" />
+    <arg name="check_duration" default="0.1" />
+    
+    <!-- Load parameters -->
+    <rosparam file="$(find idmp_ros)/config/pprai-2025-mapping.yaml" />
+
+    <!-- IDMP Node -->
+    <node pkg="idmp_ros" type="idmp" name="idmp" output="screen" />
+
+    <!-- Kinect and Filtering Node -->
+    <node name="robot_filter" pkg="sensor_filters" type="pointcloud2_filter_chain" 
+          launch-prefix="bash -c 'sleep 1; $0 $@'" output="screen">
+        <rosparam command="load" file="$(find idmp_ros)/config/realsenseFilterChain.yaml" />
+        <remap from="~depth" to="/camera/depth/points"/>
+        <remap from="~transform" to="$(arg topic_to_publish)"/>
+    </node>
+
+    <!-- Visualization for IDMP -->
+    <node pkg="rviz" type="rviz" name="rviz" respawn="false" args="-d $(find idmp_ros)/config/IDMP.rviz" output="screen" />
+</launch>
